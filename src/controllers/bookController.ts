@@ -12,7 +12,7 @@ export const createBook = async (req : Request, res : Response, next : NextFunct
         res.status(201).json(newBook)
     }
     catch (error){
-        next(new RequestError('Could not create book', 400))
+        next(new RequestError('Could not create book', 500))
     }
 } 
 
@@ -23,7 +23,7 @@ export const getBooks = async (req : Request, res : Response, next : NextFunctio
         res.status(200).json(books)
     }
     catch(error){
-        next(new RequestError('Could Not Fetch Books',500))
+        next(new RequestError('Could Not Fetch Books', 500))
     }
 }
 
@@ -42,19 +42,19 @@ export const getBookById = async (req : Request, res : Response, next : NextFunc
 }
 
 //function for updating part or all of a book Info
-export const updateBook = async (req : Request, res : Response, next : NextFunction) => {
-    try{
-        const updatedInfo : UpdateBookDto = req.body
-        const updatedBook = await Book.findByIdAndUpdate(req.params, updatedInfo, { new : true})
-        if(!updatedBook){
-           return next(new RequestError('Book Not Found', 404))
-        }
-        res.status(200).json(updatedBook)
+export const updateBook = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const updatedInfo: UpdateBookDto = req.body;
+      const updatedBook = await Book.findByIdAndUpdate(req.params.id, updatedInfo, { new: true });
+      if (!updatedBook) {
+        return next(new RequestError('Book Not Found', 404));
+      }
+      res.status(200).json(updatedBook);
+    } catch (error) {
+      next(new RequestError('Could Not Update Book', 500));
     }
-    catch(error){
-        next(new RequestError('Could Not Update Book', 500))
-    }
-}
+  };
+  
 
 //function for deleting a specic book
 export const deleteBook = async (req : Request, res : Response, next : NextFunction) => {
