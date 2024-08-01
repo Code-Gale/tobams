@@ -17,8 +17,9 @@ app.use('/uploads', express.static('uploads'))
 app.use('/api', bookRoutes)
 app.use(errorHandler)
 
-app.listen(port, () => {
-    console.log(`Listening for requests on port ${port}`)
-})
+const server = app.listen(port, async () => {
+    await connectDB();
+    console.log(`Listening for requests on port ${port}`);
+  });
 
-export default app
+export { app, server}
