@@ -1,5 +1,4 @@
 import mongoose from 'mongoose'
-import { convertCompilerOptionsFromJson } from 'typescript'
 const { Schema, Document } = mongoose
 
 export interface IBook extends Document {
@@ -32,4 +31,4 @@ const bookSchema = new Schema({
     }
 })
 
-export const Book = mongoose.model<IBook>('Book', bookSchema)
+export default mongoose.model<IBook>('Book', bookSchema)
