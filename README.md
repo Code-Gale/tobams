@@ -1,5 +1,3 @@
-Here is a `README.md` file that includes project setup and installation instructions, a description of the API endpoints and their expected inputs/outputs, and instructions on how to run the application and test the endpoints.
-
 ```markdown
 # Book API
 
